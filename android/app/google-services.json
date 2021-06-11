@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "3128080551",
+    "project_id": "loja-virtual-260a8",
+    "storage_bucket": "loja-virtual-260a8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:3128080551:android:bbc68caf6f6f0b1435c382",
+        "android_client_info": {
+          "package_name": "br.com.dmmnascimento.loja_virtual_DMpro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "3128080551-16d4puv04i3t6j6ugts235u07qvk8jlt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA7yNVIGXGv8OHKGwYvl88ypkEQfTLmJAA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "3128080551-16d4puv04i3t6j6ugts235u07qvk8jlt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
