@@ -6,7 +6,9 @@ import 'package:loja_virtual_DMpro/shared/models/signed_user.dart';
 import 'package:loja_virtual_DMpro/src/login/login_viewmodel.dart';
 
 class LoginRepository {
-  final FirebaseAuth auth = FirebaseAuth.instance;
+  final FirebaseAuth auth;
+
+  LoginRepository(this.auth);
 
   Future<String> login(LoginViewModel model) async {
     String error;

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:loja_virtual_DMpro/repositories/login_repository.dart';
 import 'package:loja_virtual_DMpro/shared/models/signed_user.dart';
 import 'package:loja_virtual_DMpro/src/login/login_controller.dart';
 import 'package:loja_virtual_DMpro/src/login/login_viewmodel.dart';
 
 class LoginPage extends StatelessWidget {
-  final LoginController controller = LoginController();
+  final controller = Modular.get<LoginController>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
