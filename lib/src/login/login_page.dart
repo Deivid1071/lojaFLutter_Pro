@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:loja_virtual_DMpro/repositories/login_repository.dart';
 import 'package:loja_virtual_DMpro/shared/models/signed_user.dart';
-import 'package:loja_virtual_DMpro/src/login/login_controller.dart';
 import 'package:loja_virtual_DMpro/src/login/login_viewmodel.dart';
 
 class LoginPage extends StatelessWidget {
-  final controller = Modular.get<LoginController>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
   final GlobalKey<FormState> formkey = GlobalKey<FormState>();
-  LoginViewModel model = LoginViewModel();
+  LoginViewModel viewModel = Modular.get<LoginViewModel>();
+  SignedUser user = SignedUser();
 
   @override
   Widget build(BuildContext context) {
@@ -30,35 +28,44 @@ class LoginPage extends StatelessWidget {
               padding: const EdgeInsets.all(16),
               shrinkWrap: true,
               children: [
-                TextFormField(
-                  decoration: const InputDecoration(hintText: 'E-mail'),
-                  keyboardType: TextInputType.emailAddress,
-                  autocorrect: false,
-                  controller: _emailController,
-                  validator: (email) {
-                    if (!controller.verifyEmailValid(email)) {
-                      return 'E-mail inválido';
-                    } else {
-                      model.email = email;
-                      return null;
-                    }
-                  },
-                ),
+                Consumer<LoginViewModel>(builder: (context, vm) {
+                  return TextFormField(
+                    decoration: const InputDecoration(hintText: 'E-mail'),
+                    keyboardType: TextInputType.emailAddress,
+                    autocorrect: false,
+                    enabled: !vm.loadingButton,
+                    controller: _emailController,
+                    validator: (email) {
+                      if (!viewModel.verifyEmailValid(email)) {
+                        return 'E-mail inválido';
+                      } else {
+                        user.email = email;
+                        return null;
+                      }
+                    },
+                  );
+                }),
                 const SizedBox(
                   height: 16,
                 ),
-                TextFormField(
-                  decoration: const InputDecoration(hintText: 'Senha'),
-                  keyboardType: TextInputType.emailAddress,
-                  autocorrect: false,
-                  controller: _passwordController,
-                  validator: (pass) {
-                    if (!controller.verifyPasswordValid(pass)) {
-                      return 'Senha deve ter no minimo 6 caracteres';
-                    } else {
-                      model.password = pass;
-                      return null;
-                    }
+                Consumer<LoginViewModel>(
+                  builder: (context, vm) {
+                    return TextFormField(
+                      decoration: const InputDecoration(hintText: 'Senha'),
+                      keyboardType: TextInputType.emailAddress,
+                      autocorrect: false,
+                      enabled: !vm.loadingButton,
+                      controller: _passwordController,
+                      obscureText: true,
+                      validator: (pass) {
+                        if (!viewModel.verifyPasswordValid(pass)) {
+                          return 'Senha deve ter no minimo 6 caracteres';
+                        } else {
+                          user.password = pass;
+                          return null;
+                        }
+                      },
+                    );
                   },
                 ),
                 Align(
@@ -74,31 +81,35 @@ class LoginPage extends StatelessWidget {
                 ),
                 SizedBox(
                   height: 44,
-                  child: RaisedButton(
-                    color: Theme.of(context).primaryColor,
-                    textColor: Colors.white,
-                    onPressed: () async {
-                      if (formkey.currentState.validate()) {
-                        await controller.login(model);
-                      }
-                      if (controller.errorLogin.isEmpty) {
-                        debugPrint('Navegar para Home');
-                      } else {
-                        showDialog(
-                            context: context,
-                            builder: (context) {
-                              return AlertDialog(
-                                title: const Text('Erro de login'),
-                                content: Text(controller.errorLogin),
-                              );
-                            });
-                      }
-                      debugPrint(SignedUser.token);
-                    },
-                    child: ValueListenableBuilder<bool>(
-                      valueListenable: controller.stateButtonLoginLoading,
-                      builder: (context, value, _) {
-                        return value
+                  child: Consumer<LoginViewModel>(
+                    builder: (context, vm) {
+                      return RaisedButton(
+                        color: Theme.of(context).primaryColor,
+                        textColor: Colors.white,
+                        disabledColor:
+                            Theme.of(context).primaryColor.withAlpha(100),
+                        onPressed: vm.loadingButton
+                            ? null
+                            : () async {
+                                if (formkey.currentState.validate()) {
+                                  await viewModel.login(user);
+
+                                  if (viewModel.errorLogin.isEmpty) {
+                                    debugPrint('Navegar para Home');
+                                  } else {
+                                    showDialog(
+                                        context: context,
+                                        builder: (context) {
+                                          return AlertDialog(
+                                            title: const Text('Erro de login'),
+                                            content: Text(viewModel.errorLogin),
+                                          );
+                                        });
+                                  }
+                                  debugPrint(SignedUser.token);
+                                }
+                              },
+                        child: vm.loadingButton
                             ? const Center(
                                 child: CircularProgressIndicator(
                                 valueColor:
@@ -107,9 +118,9 @@ class LoginPage extends StatelessWidget {
                             : const Text(
                                 'Entrar',
                                 style: TextStyle(fontSize: 18),
-                              );
-                      },
-                    ),
+                              ),
+                      );
+                    },
                   ),
                 ),
               ],
