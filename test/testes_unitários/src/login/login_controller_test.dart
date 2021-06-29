@@ -2,7 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:loja_virtual_DMpro/repositories/login_repository.dart';
-import 'package:loja_virtual_DMpro/src/login/login_controller.dart';
+import 'package:loja_virtual_DMpro/shared/models/signed_user.dart';
 import 'package:loja_virtual_DMpro/src/login/login_viewmodel.dart';
 import 'package:mockito/mockito.dart';
 
@@ -12,8 +12,8 @@ main() async {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   final repository = LoginRePositoryMock();
-  final controller = LoginController(repository);
-  LoginViewModel model = LoginViewModel();
+  final viewModel = LoginViewModel(repository);
+  SignedUser user = SignedUser();
 
   setUp(() async {
     await Firebase.initializeApp();
@@ -22,11 +22,11 @@ main() async {
     test(
         "Deve retornar um uam String de erro vazia confirmando que a requisição funcionou",
         () async {
-      model.email = '';
-      model.password = '';
-      await controller.login(model);
+      user.email = '';
+      user.password = '';
+      await viewModel.login(user);
 
-      expect(controller.errorLogin, '');
+      expect(viewModel.errorLogin, '');
     });
   });
 }
