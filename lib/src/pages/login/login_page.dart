@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:loja_virtual_DMpro/shared/models/signed_user.dart';
-import 'package:loja_virtual_DMpro/src/login/login_viewmodel.dart';
+import 'package:loja_virtual_DMpro/src/models/signed_user.dart';
+
+import 'login_viewmodel.dart';
 
 class LoginPage extends StatelessWidget {
   final TextEditingController _emailController = TextEditingController();

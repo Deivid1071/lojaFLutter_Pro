@@ -1,9 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:loja_virtual_DMpro/repositories/login_repository.dart';
-import 'package:loja_virtual_DMpro/shared/models/signed_user.dart';
-import 'package:loja_virtual_DMpro/src/login/login_viewmodel.dart';
+import 'package:loja_virtual_DMpro/src/models/signed_user.dart';
+import 'package:loja_virtual_DMpro/src/pages/login/login_viewmodel.dart';
+import 'package:loja_virtual_DMpro/src/repositories/login_repository.dart';
+
 import 'package:mockito/mockito.dart';
 
 class LoginRePositoryMock extends Mock implements LoginRepository {}

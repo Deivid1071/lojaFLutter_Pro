@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:loja_virtual_DMpro/helpers/firebase_errors.dart';
-import 'package:loja_virtual_DMpro/shared/models/signed_user.dart';
+import 'package:loja_virtual_DMpro/src/helpers/firebase_errors.dart';
+import 'package:loja_virtual_DMpro/src/models/signed_user.dart';
 
 class LoginRepository {
   final FirebaseAuth auth;

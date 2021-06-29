@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:loja_virtual_DMpro/repositories/login_repository.dart';
-import 'package:loja_virtual_DMpro/src/login/login_viewmodel.dart';
+import 'package:loja_virtual_DMpro/src/pages/login/login_viewmodel.dart';
+import 'package:loja_virtual_DMpro/src/repositories/login_repository.dart';
 
 import '../main.dart';
 

@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:loja_virtual_DMpro/helpers/validators.dart';
-import 'package:loja_virtual_DMpro/repositories/login_repository.dart';
-import 'package:loja_virtual_DMpro/shared/models/signed_user.dart';
+import 'package:loja_virtual_DMpro/src/helpers/validators.dart';
+import 'package:loja_virtual_DMpro/src/models/signed_user.dart';
+import 'package:loja_virtual_DMpro/src/repositories/login_repository.dart';
 
 class LoginViewModel extends ChangeNotifier {
   final LoginRepository repository;

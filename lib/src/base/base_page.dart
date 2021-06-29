@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:loja_virtual_DMpro/src/base/page_manager.dart';
 import 'package:loja_virtual_DMpro/src/base/widgets/custom_drawer_widget.dart';
-import 'package:loja_virtual_DMpro/src/login/login_page.dart';
+import 'package:loja_virtual_DMpro/src/pages/login/login_page.dart';
 
 import 'package:provider/provider.dart';
 
