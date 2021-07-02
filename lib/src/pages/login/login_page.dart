@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_modular/flutter_modular.dart' hide Consumer;
 import 'package:loja_virtual_DMpro/src/models/signed_user.dart';
+import 'package:loja_virtual_DMpro/src/pages/register/register_page.dart';
+import 'package:provider/provider.dart';
 
 import 'login_viewmodel.dart';
 
 class LoginPage extends StatelessWidget {
+  static const routeName = '/login_page';
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
@@ -29,7 +32,7 @@ class LoginPage extends StatelessWidget {
               padding: const EdgeInsets.all(16),
               shrinkWrap: true,
               children: [
-                Consumer<LoginViewModel>(builder: (context, vm) {
+                Consumer<LoginViewModel>(builder: (context, vm, child) {
                   return TextFormField(
                     decoration: const InputDecoration(hintText: 'E-mail'),
                     keyboardType: TextInputType.emailAddress,
@@ -50,7 +53,7 @@ class LoginPage extends StatelessWidget {
                   height: 16,
                 ),
                 Consumer<LoginViewModel>(
-                  builder: (context, vm) {
+                  builder: (context, vm, child) {
                     return TextFormField(
                       decoration: const InputDecoration(hintText: 'Senha'),
                       keyboardType: TextInputType.emailAddress,
@@ -83,7 +86,7 @@ class LoginPage extends StatelessWidget {
                 SizedBox(
                   height: 44,
                   child: Consumer<LoginViewModel>(
-                    builder: (context, vm) {
+                    builder: (context, vm, child) {
                       return RaisedButton(
                         color: Theme.of(context).primaryColor,
                         textColor: Colors.white,
@@ -122,6 +125,19 @@ class LoginPage extends StatelessWidget {
                               ),
                       );
                     },
+                  ),
+                ),
+                const SizedBox(
+                  height: 24,
+                ),
+                FlatButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, RegisterPage.routeName);
+                  },
+                  child: Text(
+                    'CRIAR CONTA',
+                    style: TextStyle(
+                        fontSize: 14, color: Theme.of(context).primaryColor),
                   ),
                 ),
               ],
