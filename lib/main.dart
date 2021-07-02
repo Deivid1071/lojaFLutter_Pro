@@ -1,12 +1,9 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-
 import 'package:loja_virtual_DMpro/src/app.module.dart';
-import 'package:loja_virtual_DMpro/src/base/base_page.dart';
+import 'package:loja_virtual_DMpro/src/pages/login/login_page.dart';
 import 'package:loja_virtual_DMpro/src/pages/login/login_viewmodel.dart';
-
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -31,7 +28,10 @@ class MyApp extends StatelessWidget {
             primarySwatch: Colors.blue,
             visualDensity: VisualDensity.adaptivePlatformDensity,
             appBarTheme: const AppBarTheme(elevation: 0)),
-        home: BasePage(),
+        initialRoute: LoginPage.routeName,
+        navigatorKey: Modular.navigatorKey,
+        // add Modular to manage the routing system
+        onGenerateRoute: Modular.generateRoute,
       ),
     );
   }
